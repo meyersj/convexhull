@@ -1,6 +1,7 @@
 import time
 from random import randint
 import csv
+from pylab import *
 
 BRUTE = "BruteForce"
 QUICK = "QuickHull"
@@ -31,7 +32,8 @@ class Runner(object):
         # validate output results?
         self.record(data, END)     
         self.write_results(name, data)
-    
+        return output
+ 
     def write_results(self, name, data):
         time_diff = (data[TIME.format(END)] - data[TIME.format(START)]) * 1000
         self.writer.writerow([self.name + name, time_diff])
@@ -56,28 +58,58 @@ class BruteForce(Runner):
                                     side = -1
                                 elif x > 0:
                                     side = 1
-                                elif x < 0 and side != -1:
-                                    side = -2
-                                    break
-                                elif x > 0 and side != 1:
-                                    side = -2
-                                    break
+                            elif x < 0 and side != -1:
+                                side = -2
+                                break
+                            elif x > 0 and side != 1:
+                                side = -2
+                                break
                     if side != -2:
-                        convexHull.append(i)
-                        convexHull.append(j)
-        return convexHull
+                        convexHull.append(tuple(i))
+                        convexHull.append(tuple(j))
+        return list(set(convexHull))
 
 class QuickHull(Runner):
 
     def algorithm(self, points):
-        max_val = None
-        for point in points:
-            if max_val < point:
-                max_val = point
-        return max_val
+        minX = []
+        maxX = []
+        for i in points:
+            if i[0] < minX: minX = i
+            elif i[0] > maxX: maxX = i
 
-def generateMatrix(num):
-    return [ [randint(0,100), randint(0,100)] for x in range(num) ] 
+        convexHull = quickHullUpper(minX, maxX, points)
+        convexHull.append(quickHullLower(minX, maxX, points))
+        return convexHull
+
+    def quickHullUpper(self, left, right, points):
+        #find point creates largest area
+        #construct two sets left and right
+        #call again on left and right sets
+        #return set of convex hull for each recurrence
+
+
+
+
+def generateMatrix(num, size):
+    return [ [randint(0,size), randint(0,size)] for x in range(num) ] 
+
+def plotData(data, hull, size):
+    for i in data:
+        plot(i[0], i[1], "b.")
+    
+    ylim(0,size)
+    xlim(0,size) 
+    
+    i = 0
+    while i < len(hull)-1:
+        plot([hull[i][0], hull[i+1][0]], [hull[i][1], hull[i+1][1]], color='k')
+        i = i + 1
+
+    plot([hull[-1][0], hull[0][0]], [hull[-1][1], hull[0][1]], color='k')
+
+
+    savefig("foo.png")
 
 def main(output):
     csvfile = open(output, 'a')
@@ -87,16 +119,11 @@ def main(output):
     brute = BruteForce(name=BRUTE, writer=writer)
     quick = QuickHull(name=QUICK, writer=writer)
 
-    data = generateMatrix(10)
+    data = generateMatrix(10, 100)
     print data
-    print brute.run("", data)
-
-    # run each sample on both brute force and quickhull
-    #for index, sample in enumerate(samples):
-     #   brute.run("test" + str(index), sample)
-    #for index, sample in enumerate(samples):
-    #    quick.run("test" + str(index), sample)
-    
+    convexHull =  brute.run("", data)
+    print convexHull
+    plotData(data, convexHull, 100) 
 
     csvfile.close()
 
