@@ -116,17 +116,13 @@ def sortHull(hull, points):
     difference = list(set(map(tuple,points)) - set(map(tuple,hull)))
     if difference == None: return hull
     inside = difference[0]
-    print inside
     polar = []
     for i in hull:
         x = i[0] - inside[0]
         y = i[1] - inside[1]
         angle = math.atan2(y, x)
-        print angle
-        print math.degrees(angle)
         polar.append(angle)
     
-    print sorted(zip(polar, hull))
     hull = [(x,y) for (z,(x, y)) in sorted(zip(polar, hull))]
     return hull
 
