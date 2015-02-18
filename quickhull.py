@@ -53,21 +53,21 @@ class BruteForce(Runner):
         if len(dataPoints) <= 2:
             return list(set(dataPoints))
         convexHull = Set()
-        for i in dataPoints:                            # loop through all i,j pairs
+        for i in dataPoints:                                # loop through all i,j pairs
             for j in dataPoints:            
-                if i == j: continue                     # skip if equal
+                if i == j: continue                         # skip if equal
                 side = 0
-                for k in dataPoints:                    # compare pairs i,j to every k
-                    if k == i or k == j: continue       # skip if equal
-                    newSide = self.sideOfLine(i, j, k)  # check which side k is on
-                    if newSide:                         # skip if k is on line
-                        if not side: side = newSide     # set intial side
+                for k in dataPoints:                        # compare pairs i,j to every k
+                    if k == i or k == j: continue           # skip if equal
+                    newSide = self.sideOfLine(i, j, k)      # check which side k is on
+                    if newSide:                             # skip if k is on line
+                        if not side: side = newSide         # set intial side
                         elif (side < 0 and newSide > 0) \
                             or (side > 0 and newSide < 0):
-                            side = False                # set error flag if diff side
+                            side = False                    # set error flag if diff side
                             break
-                if side != False:                       # add points i and j to hull
-                    convexHull.add(i)                   # of all k were on same side
+                if side != False:                           # add points i and j to hull
+                    convexHull.add(i)                       # of all k were on same side
                     convexHull.add(j)
         return list(convexHull)
 
@@ -100,9 +100,9 @@ class QuickHull(Runner):
         if len(points) == 1: return [i, j, points[0]]
         
         hull = []
-        maxPoint = self.findMaxPoint(i, j, points)
         left = []
         right = []
+        maxPoint = self.findMaxPoint(i, j, points)
         for k in points:
             if k in [i, j, maxPoint]: continue
             sideA = self.sideOfLine(i, maxPoint, k)
