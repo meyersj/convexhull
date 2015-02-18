@@ -1,7 +1,9 @@
 import time
 from random import randint
 import csv
+from numpy import random
 from pylab import *
+from scipy.spatial import ConvexHull
 import math
 
 BRUTE = "BruteForce"
@@ -46,10 +48,10 @@ class BruteForce(Runner):
         convexHull = []
         for i in dataPoints:
             for j in dataPoints:
-                if i != j:
+                if set(i) != set(j):
                     side = 0
                     for k in dataPoints:
-                        if k != i and k != j:
+                        if set(k) != set(i) and set(k) != set(j):
                             a = j[1] - i[1]
                             b = i[0] - j[0]
                             c = (i[0] * j[1]) - (i[1] * j[0])
@@ -92,16 +94,16 @@ class QuickHull(Runner):
 
 
 
-def generateMatrix(num, size):
-    return [ [randint(0,size), randint(0,size)] for x in range(num) ] 
+def generateMatrix(num):
+    return rand(num, 2) 
 
-def plotData(data, hull, dataRange):
+def plotData(data, hull, name):
     for i in data:
         plot(i[0], i[1], "b.")
     
-    ylim(0,dataRange)
-    xlim(0,dataRange) 
-    
+    ylim(0,1)
+    xlim(0,1) 
+   
     i = 0
     while i < len(hull)-1:
         plot([hull[i][0], hull[i+1][0]], [hull[i][1], hull[i+1][1]], color='k')
@@ -109,8 +111,15 @@ def plotData(data, hull, dataRange):
 
     plot([hull[-1][0], hull[0][0]], [hull[-1][1], hull[0][1]], color='k')
 
+    savefig(name)
 
-    savefig("foo.png")
+def plotStandardData(points, hull, name):
+    for i in points:
+        plot(i[0], i[1], 'b.')
+    for simplex in hull.simplices:
+        plot(points[simplex,0], points[simplex,1], 'k-')
+
+    savefig(name)
 
 def sortHull(hull, points):
     difference = list(set(map(tuple,points)) - set(map(tuple,hull)))
@@ -134,14 +143,30 @@ def main(output):
     quick = QuickHull(name=QUICK, writer=writer)
 
     size = 50
-    dataRange = 100
-    data = generateMatrix(size, dataRange)
+	#Generate set of points
+    data = generateMatrix(size)
+    print "\ndata:"
     print data
+	#Run our brute force 
     convexHull =  brute.run("", data)
-    print convexHull
+    print "\nconvexHull:"
+    for vertex in convexHull:
+        print vertex
+	#Sort points for pretty picture
     sortedHull = sortHull(convexHull, data)
-    print sortedHull
-    plotData(data, sortedHull, dataRange)
+    print "\nsortedConvexHull:"
+    for vertex in sortedHull:
+        print vertex
+	#Plot pretty picture
+    plotData(data, sortedHull, "bruteforce.png")
+
+	#Standard Library
+    stdConvexHull = ConvexHull(data)
+    print "\nstandardPoints:"
+    for vertex in stdConvexHull.vertices:
+        print stdConvexHull.points[vertex]
+    plotStandardData(data, stdConvexHull, "standard.png")
+
     csvfile.close()
 
 
