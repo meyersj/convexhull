@@ -2,6 +2,7 @@ import time
 from random import randint
 import csv
 from pylab import *
+import math
 
 BRUTE = "BruteForce"
 QUICK = "QuickHull"
@@ -82,7 +83,7 @@ class QuickHull(Runner):
         convexHull.append(quickHullLower(minX, maxX, points))
         return convexHull
 
-    def quickHullUpper(self, left, right, points):
+    #def quickHullUpper(self, left, right, points):
         #find point creates largest area
         #construct two sets left and right
         #call again on left and right sets
@@ -94,12 +95,12 @@ class QuickHull(Runner):
 def generateMatrix(num, size):
     return [ [randint(0,size), randint(0,size)] for x in range(num) ] 
 
-def plotData(data, hull, size):
+def plotData(data, hull, dataRange):
     for i in data:
         plot(i[0], i[1], "b.")
     
-    ylim(0,size)
-    xlim(0,size) 
+    ylim(0,dataRange)
+    xlim(0,dataRange) 
     
     i = 0
     while i < len(hull)-1:
@@ -111,20 +112,40 @@ def plotData(data, hull, size):
 
     savefig("foo.png")
 
+def sortHull(hull, points):
+    difference = list(set(map(tuple,points)) - set(map(tuple,hull)))
+    if difference == None: return hull
+    inside = difference[0]
+    print inside
+    polar = []
+    for i in hull:
+        x = i[0] - inside[0]
+        y = i[1] - inside[1]
+        angle = math.atan2(y, x)
+        print angle
+        print math.degrees(angle)
+        polar.append(angle)
+    
+    print sorted(zip(polar, hull))
+    hull = [(x,y) for (z,(x, y)) in sorted(zip(polar, hull))]
+    return hull
+
 def main(output):
     csvfile = open(output, 'a')
     writer = csv.writer(csvfile)
-  
     
     brute = BruteForce(name=BRUTE, writer=writer)
     quick = QuickHull(name=QUICK, writer=writer)
 
-    data = generateMatrix(10, 100)
+    size = 50
+    dataRange = 100
+    data = generateMatrix(size, dataRange)
     print data
     convexHull =  brute.run("", data)
     print convexHull
-    plotData(data, convexHull, 100) 
-
+    sortedHull = sortHull(convexHull, data)
+    print sortedHull
+    plotData(data, sortedHull, dataRange)
     csvfile.close()
 
 
