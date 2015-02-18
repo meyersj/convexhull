@@ -1,5 +1,5 @@
 import time
-import random
+from random import randint
 import csv
 
 BRUTE = "BruteForce"
@@ -39,13 +39,33 @@ class Runner(object):
 
 class BruteForce(Runner):
 
-    def algorithm(self, points):
-        max_val = None
-        for point in points:
-            if max_val < point:
-                max_val = point
-        return max_val
-
+    def algorithm(self, dataPoints):
+        convexHull = []
+        for i in dataPoints:
+            for j in dataPoints:
+                if i != j:
+                    side = 0
+                    for k in dataPoints:
+                        if k != i and k != j:
+                            a = j[1] - i[1]
+                            b = i[0] - j[0]
+                            c = (i[0] * j[1]) - (i[1] * j[0])
+                            x = ((a*k[0] + b*k[1]) - c)
+                            if side == 0:
+                                if x < 0:
+                                    side = -1
+                                elif x > 0:
+                                    side = 1
+                                elif x < 0 and side != -1:
+                                    side = -2
+                                    break
+                                elif x > 0 and side != 1:
+                                    side = -2
+                                    break
+                    if side != -2:
+                        convexHull.append(i)
+                        convexHull.append(j)
+        return convexHull
 
 class QuickHull(Runner):
 
@@ -56,24 +76,27 @@ class QuickHull(Runner):
                 max_val = point
         return max_val
 
+def generateMatrix(num):
+    return [ [randint(0,100), randint(0,100)] for x in range(num) ] 
 
 def main(output):
     csvfile = open(output, 'a')
     writer = csv.writer(csvfile)
   
+    
     brute = BruteForce(name=BRUTE, writer=writer)
     quick = QuickHull(name=QUICK, writer=writer)
 
-    # create samples
-    samples = []
-    for i in range(0, 10):
-        samples.append(random.sample(range(1, 100), 10))
-   
+    data = generateMatrix(10)
+    print data
+    print brute.run("", data)
+
     # run each sample on both brute force and quickhull
-    for index, sample in enumerate(samples):
-        brute.run("test" + str(index), sample)
-    for index, sample in enumerate(samples):
-        quick.run("test" + str(index), sample)
+    #for index, sample in enumerate(samples):
+     #   brute.run("test" + str(index), sample)
+    #for index, sample in enumerate(samples):
+    #    quick.run("test" + str(index), sample)
+    
 
     csvfile.close()
 
