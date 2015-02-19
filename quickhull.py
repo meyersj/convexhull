@@ -144,19 +144,6 @@ class QuickHull(Runner):
 def generateMatrix(num, size):
     return [ (randint(0,size), randint(0,size)) for x in range(1, num) ] 
 
-def plotData(data, hull, size, name):
-    ylim(0,size)
-    xlim(0,size) 
-    clf()
-    for i in data:
-        plot(i[0], i[1], "b.")
-    i = 0
-    while i < len(hull)-1:
-        plot([hull[i][0], hull[i+1][0]], [hull[i][1], hull[i+1][1]], color='k')
-        i = i + 1
-    plot([hull[-1][0], hull[0][0]], [hull[-1][1], hull[0][1]], color='k')
-    savefig(name)
-
 
 def main(output):
     csvfile = open(output, 'a')
