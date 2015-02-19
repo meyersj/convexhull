@@ -1,11 +1,14 @@
 import time
 import os
 import csv
-from numpy import array
 from sets import Set
+import math
+from timeit import timeit
+
+from numpy import array
 from pylab import plot, rand, ylim, xlim, savefig
 from scipy.spatial import ConvexHull
-import math
+
 
 BRUTE = "BruteForce"
 QUICK = "QuickHull"
@@ -33,13 +36,13 @@ class Runner(object):
         data[TIME.format(phase)] = time.clock()
     
     def run(self, name, points):
-        print "TEST", name
         data = {}        
+        print "TEST", name
         self.record(data, START)     
         results = self.algorithm(points)
+        self.record(data, END)     
         check = self.validate(points, results) 
         print "   validate: ", check 
-        self.record(data, END)     
         self.plotData(points, results, name)
         self.writeResults("test", data)
         return results
@@ -84,7 +87,7 @@ class Runner(object):
 
     def writeResults(self, name, data):
         time_diff = (data[TIME.format(END)] - data[TIME.format(START)]) * 1000
-        print "   time: ", time_diff
+        print "   time: ", time_diff, "ms"
         #self.writer.writerow([self.name + name, time_diff])
     
     def sideOfLine(self, i, j, k):
@@ -193,13 +196,14 @@ def main(output):
 
     brute = BruteForce(name=BRUTE, writer=writer, outdir="output")
     quick = QuickHull(name=QUICK, writer=writer, outdir="output")
-
-    size = 500
-    data = generateMatrix(size)
-    brute.run("brute", data)
-    quick.run("quick", sorted(data))
-    brute.plotStd(data)    
     
+
+    size = 100
+    data = sorted(generateMatrix(size))
+    brute.run("brute", data)
+    quick.run("quick", data)
+    brute.plotStd(data)    
+
     csvfile.close()
 
 
