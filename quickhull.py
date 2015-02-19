@@ -2,9 +2,8 @@ import time
 import os
 import csv
 from numpy import array
-#ifrom numpy import random as NPrandom
 from sets import Set
-from pylab import *
+from pylab import plot, rand, ylim, xlim, savefig
 from scipy.spatial import ConvexHull
 import math
 
@@ -83,7 +82,7 @@ class Runner(object):
 
     def writeResults(self, name, data):
         time_diff = (data[TIME.format(END)] - data[TIME.format(START)]) * 1000
-        print "   time", time_diff
+        print "   time: ", time_diff
         #self.writer.writerow([self.name + name, time_diff])
     
     def sideOfLine(self, i, j, k):
@@ -127,24 +126,23 @@ class QuickHull(Runner):
         
         left = []
         right = []
-        convexHull = []
+        hull = []
         minPoint = dataPoints[0]
         maxPoint = dataPoints[len(dataPoints)-1]
         for k in dataPoints:
             if k == minPoint or k == maxPoint: continue
             side = self.sideOfLine(minPoint, maxPoint, k)
-            #print k, side
             if side <= 0: left.append(k)
             else: right.append(k)
         
-        convexHull += [minPoint, maxPoint]
-        convexHull += self.subHull(minPoint, maxPoint, left, -1)
-        convexHull += self.subHull(minPoint, maxPoint, right, 1)
-        return list(set(convexHull))
+        hull += [minPoint, maxPoint]
+        hull += self.subHull(minPoint, maxPoint, left, -1)
+        hull += self.subHull(minPoint, maxPoint, right, 1)
+        return list(set(hull))
     
     def subHull(self, i, j, points, startSide):
         if not points: return []
-        if len(points) == 1: return [i, j, points[0]]
+        if len(points) == 1: return [points[0]]
         
         hull = []
         left = []
@@ -203,6 +201,9 @@ def main(output):
     
     csvfile.close()
 
+
 if __name__ == '__main__':
     main("results.csv")
+
+
 
