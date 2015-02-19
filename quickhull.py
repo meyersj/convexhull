@@ -88,10 +88,10 @@ class Runner(object):
         #self.writer.writerow([self.name + name, time_diff])
     
     def sideOfLine(self, i, j, k):
-            a = j[1] - i[1]
-            b = i[0] - j[0]
-            c = (i[0] * j[1]) - (i[1] * j[0])
-            return ((a*k[0] + b*k[1]) - c)
+        a = j[1] - i[1]
+        b = i[0] - j[0]
+        c = (i[0] * j[1]) - (i[1] * j[0])
+        return ((a*k[0] + b*k[1]) - c)
 
 
 class BruteForce(Runner):
@@ -130,7 +130,7 @@ class QuickHull(Runner):
         right = []
         hull = []
         minPoint = dataPoints[0]
-        maxPoint = dataPoints[len(dataPoints)-1]
+        maxPoint = dataPoints[-1]
         for k in dataPoints:
             if k == minPoint or k == maxPoint: continue
             side = self.sideOfLine(minPoint, maxPoint, k)
