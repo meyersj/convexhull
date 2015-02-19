@@ -110,8 +110,7 @@ class BruteForce(Runner):
                     newSide = self.sideOfLine(i, j, k)
                     if newSide:
                         if not side: side = newSide
-                        elif (side < 0 and newSide > 0) \
-                            or (side > 0 and newSide < 0):
+                        elif (side < 0 and newSide > 0) or (side > 0 and newSide < 0):
                             side = False
                             break
                 if side != False:
