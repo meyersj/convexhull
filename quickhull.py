@@ -22,6 +22,8 @@ class Runner(object):
             self.writer = kwargs["writer"]
             self.name = kwargs["name"]
             self.outdir = kwargs["outdir"]
+            if not os.path.exists(self.outdir):
+                os.makedirs(self.outdir)
         except:
             pass
 
