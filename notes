@@ -1,2 +1,14 @@
 Talk about the quick hull algorithm using some implementation of a set
     -depending on your implementation that could effect performance
+
+
+report topics
+    Edge case when there is a line of points between 
+
+    Our standard lib uses the Qhull library which is an implementation of quickhull
+
+    tried optimized to match performance of QHull library
+
+    using sets for gathering points on convex hull vs adding to list and converting
+    to set at end
+

@@ -6,9 +6,10 @@ import math
 from timeit import timeit
 
 from numpy import array
-from pylab import plot, rand, ylim, xlim, savefig
+from pylab import clf, plot, rand, ylim, xlim, savefig
 from scipy.spatial import ConvexHull
 
+from generator import Generator
 
 BRUTE = "BruteForce"
 QUICK = "QuickHull"
@@ -48,6 +49,7 @@ class Runner(object):
         return results
 
     def plotData(self, data, hull, name):
+        clf()
         hull = self.sortHull(hull, data)
         for i in data:
             plot(i[0], i[1], "b.")
@@ -74,9 +76,13 @@ class Runner(object):
         return hull
     
     def generateStd(self, points):
+        start = time.clock()
+
         stdHull = []
         for vertex in ConvexHull(points).vertices:
             stdHull.append((points[vertex][0], points[vertex][1]))
+        print "  std: ", (time.clock() - start) * 1000
+
         return stdHull
 
     def plotStd(self, points):
@@ -88,7 +94,7 @@ class Runner(object):
     def writeResults(self, name, data):
         time_diff = (data[TIME.format(END)] - data[TIME.format(START)]) * 1000
         print "   time: ", time_diff, "ms"
-        #self.writer.writerow([self.name + name, time_diff])
+        self.writer.writerow([self.name + name, time_diff, "hello"])
     
     def sideOfLine(self, i, j, k):
         a = j[1] - i[1]
@@ -116,6 +122,10 @@ class BruteForce(Runner):
                         elif (side < 0 and newSide > 0) or (side > 0 and newSide < 0):
                             side = False
                             break
+                    else:
+                        pass
+                        # check if distance between i and k is greater than i and j
+                        # if i to j is shorter set error flag
                 if side != False:
                     convexHull.add(i)
                     convexHull.add(j)
@@ -158,10 +168,10 @@ class QuickHull(Runner):
             sideB = self.sideOfLine(maxPoint, j, k)
             if startSide < 0:
                 if sideA < 0: left.append(k)
-                elif sideB < 0: right.append(k)
+                if sideB < 0: right.append(k)
             elif startSide > 0:
                 if sideA > 0: left.append(k)
-                elif sideB > 0: right.append(k)
+                if sideB > 0: right.append(k)
         
         hull += [i, j, maxPoint]
         hull += self.subHull(i, maxPoint, left, startSide)
@@ -194,12 +204,13 @@ def main(output):
     csvfile = open(output, 'a')
     writer = csv.writer(csvfile)
 
+    tests = Generator()
     brute = BruteForce(name=BRUTE, writer=writer, outdir="output")
     quick = QuickHull(name=QUICK, writer=writer, outdir="output")
     
 
     size = 100
-    data = sorted(generateMatrix(size))
+    data = sorted(tests.random(size))
     brute.run("brute", data)
     quick.run("quick", data)
     brute.plotStd(data)    
