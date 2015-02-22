@@ -1,4 +1,6 @@
 from pylab import rand
+import numpy
+import math
 
 # [ (x1, y1), (x2, y2), .... ]
 
@@ -39,4 +41,19 @@ class Generator(object):
         data.append((0.0, 0.0))
         data.append((0.5, 1.0))
         return data
-        
+       
+    def randomConvexPolygon(self, num):
+        data = [] 
+        distance = numpy.random.uniform(0,.5)
+        mid = (.5, .5)
+        angleInc = (360/num)
+        angle = 0 
+        while angle < 360:
+            x = mid[0] + (distance * math.cos(math.radians(angle)))
+            y = mid[1] + (distance * math.sin(math.radians(angle)))
+            data.append((x, y))
+            angle += angleInc
+        return data
+
+
+ 
