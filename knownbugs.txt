@@ -1,0 +1,1 @@
+Qhull does not accept 1-D sets of points (lines)
