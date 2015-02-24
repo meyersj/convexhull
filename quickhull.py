@@ -3,13 +3,12 @@ import os
 import csv
 from sets import Set
 import math
-from timeit import timeit
 
 from numpy import array
 from pylab import clf, plot, rand, ylim, xlim, savefig
 from scipy.spatial import ConvexHull
 
-from generator import Generator
+from generator import Generator as Gen
 
 BRUTE = "BruteForce"
 QUICK = "QuickHull"
@@ -17,7 +16,6 @@ START = "start"
 END = "end"
 TIME = "{}_time"
 MEM = "{}_memory"
-
 
 class Runner(object):
 
@@ -36,7 +34,7 @@ class Runner(object):
     def record(self, data, phase):
         data[TIME.format(phase)] = time.clock()
     
-    def run(self, name, points):
+    def run(self, name, points, plot=False):
         data = {}        
         print "TEST", name
         self.record(data, START)     
@@ -44,7 +42,7 @@ class Runner(object):
         self.record(data, END)     
         check = self.validate(points, results) 
         print "   validate: ", check 
-        self.plotData(points, results, name)
+        if plot: self.plotData(points, results, name)
         self.writeResults("test", data)
         return results
 
@@ -64,7 +62,7 @@ class Runner(object):
      
     def sortHull(self, hull, points):
         difference = list(set(map(tuple,points)) - set(map(tuple,hull)))
-        if difference == None: return hull
+        if not difference: return hull
         inside = difference[0]
         polar = []
         for i in hull:
@@ -204,17 +202,23 @@ def main(output):
     csvfile = open(output, 'a')
     writer = csv.writer(csvfile)
 
-    tests = Generator()
     brute = BruteForce(name=BRUTE, writer=writer, outdir="output")
     quick = QuickHull(name=QUICK, writer=writer, outdir="output")
-    
 
     size = 100
-    data = sorted(tests.random(size))
-    brute.run("brute", data)
-    quick.run("quick", data)
-    brute.plotStd(data)    
-
+    data1 = sorted(Gen.random(size))
+    data2 = sorted(Gen.randomHorLine(size))
+    data3 = sorted(Gen.randomVertLine(size))
+    data4 = sorted(Gen.randomTriangle(size))
+    data5 = sorted(Gen.randomConvexPolygon(size))
+    data6 = sorted(Gen.trimetStops("data/tm_stops.json", size))
+    
+    for data in [data1, data4, data5, data6]:
+        print
+        brute.run("brute", data, plot=False)
+        quick.run("quick", data, plot=True)
+    
+    #brute.plotStd(data)    
     csvfile.close()
 
 

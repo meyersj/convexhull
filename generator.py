@@ -1,17 +1,21 @@
+import math
+import json
+
 from pylab import rand
 import numpy
-import math
 
 # [ (x1, y1), (x2, y2), .... ]
 
 class Generator(object):
 
-    def random(self, num):
+    @staticmethod
+    def random(num):
         return [ (x[0], x[1]) for x in rand(num, 2) ]
 
-    def randomHorLine(self, num):
+    @staticmethod
+    def randomHorLine(num):
         data = []
-        points = sorted(self.random(num))
+        points = sorted(Generator.random(num))
         minX = points[0]
         maxX = points[len(points) - 1]
         slope = (maxX[1] - minX[1]) / (maxX[0] - minX[0])
@@ -20,9 +24,10 @@ class Generator(object):
             data.append((point[0], point[0]*slope + intercept))
         return data
 
-    def randomVertLine(self, num):
+    @staticmethod
+    def randomVertLine(num):
         data = []
-        points = sorted(self.random(num), key=lambda tuple:tuple[1])
+        points = sorted(Generator.random(num), key=lambda tuple:tuple[1])
         minX = points[0]
         maxX = points[len(points) - 1]
         slope = (maxX[1] - minX[1]) / (maxX[0] - minX[0])
@@ -31,7 +36,8 @@ class Generator(object):
             data.append(((point[1] - intercept) / slope, point[1]))
         return data
 
-    def randomTriangle(self, num):
+    @staticmethod
+    def randomTriangle(num):
         data = []
         while len(data) < num - 3:
             point = rand(2)
@@ -42,7 +48,8 @@ class Generator(object):
         data.append((0.5, 1.0))
         return data
        
-    def randomConvexPolygon(self, num):
+    @staticmethod
+    def randomConvexPolygon(num):
         data = [] 
         distance = numpy.random.uniform(0,.5)
         mid = (.5, .5)
@@ -55,5 +62,19 @@ class Generator(object):
             angle += angleInc
         return data
 
+    @staticmethod
+    def trimetStops(inJson, limit):
+        data = []
+        jsonData = open(inJson).read()
+        points = json.loads(jsonData)["features"]
+        for point in points:
+            data.append((
+                point["geometry"]["coordinates"][0],
+                point["geometry"]["coordinates"][1]))
+       
+        if limit: return data[0:limit]
+        return data
 
+if __name__ == "__main__":
+    Generator.trimetStops("data/tm_stops.json")
  
