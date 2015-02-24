@@ -11,10 +11,8 @@ function fetch() {
     wget ${url}/${name}.zip
     unzip ${name}.zip
     ogr2ogr -f "GeoJSON" ${name}.json ${name}.shp ${name}
-    mv ${name}.json ../
-    rm ./*
+    mv ${name}.json ../ && rm ./*
 }
-
 
 mkdir tmp
 cd tmp
@@ -25,5 +23,4 @@ fetch ${tc}
 
 cd ..
 rm -r tmp
-
 
