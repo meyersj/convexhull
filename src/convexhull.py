@@ -1,55 +1,21 @@
 import time
 import os
-import csv
 from sets import Set
 import math
 
-from numpy import array
 from pylab import clf, plot, rand, ylim, xlim, savefig
-from scipy.spatial import ConvexHull
+from scipy.spatial import ConvexHull as QHull
 
 from generator import Generator as Gen
 
-BRUTE = "BruteForce"
-QUICK = "QuickHull"
-START = "start"
-END = "end"
-TIME = "{}_time"
-MEM = "{}_memory"
-
-class Runner(object):
-
-    def __init__(self, **kwargs):
-        self.times = []
-        
-        try:
-            self.writer = kwargs["writer"]
-            self.name = kwargs["name"]
-            self.outdir = kwargs["outdir"]
-            if not os.path.exists(self.outdir):
-                os.makedirs(self.outdir)
-        except:
-            pass
-
-    # add metrics that record starting time
-    # starting/ending time, memory usage and more?
-    def record(self, data, phase):
-        data[TIME.format(phase)] = time.clock()
+class Plotter(object):
     
-    def run(self, name, points, plot=False):
-        data = {}        
-        #print "TEST", name
-        self.record(data, START)     
-        results = self.algorithm(points)
-        self.record(data, END)     
-        #check = self.validate(points, results) 
-        #print "   validate: ", check 
-        if plot: self.plotData(points, results, name)
-        self.saveResults("test", data)
-        
-        return results
+    def __init__(self, outdir=""):
+        self.outdir = outdir
+        #if not os.path.exists(self.outdir):
+        #    os.makedirs(self.outdir)
 
-    def plotData(self, data, hull, name):
+    def save(self, name, data, hull):
         clf()
         hull = self.sortHull(hull, data)
         for i in data:
@@ -63,8 +29,8 @@ class Runner(object):
         plot([hull[-1][0], hull[0][0]], [hull[-1][1], hull[0][1]], color='k')
         savefig(os.path.join(self.outdir, name))
      
-    def sortHull(self, hull, points):
-        difference = list(set(map(tuple,points)) - set(map(tuple,hull)))
+    def sortHull(self, data, hull):
+        difference = list(set(map(tuple,data)) - set(map(tuple,hull)))
         if not difference: return hull
         inside = difference[0]
         polar = []
@@ -75,31 +41,22 @@ class Runner(object):
             polar.append(angle)
         hull = [(x,y) for (z,(x, y)) in sorted(zip(polar, hull))]
         return hull
+
+
+class ConvexHull(object):
+
+    def __init__(self):
+        self.name = self.__class__.__name__
     
-    def generateStd(self, points):
+    def time(self, data):
         start = time.clock()
-
-        stdHull = []
-        for vertex in ConvexHull(points).vertices:
-            stdHull.append((points[vertex][0], points[vertex][1]))
-        print "  std: ", (time.clock() - start) * 1000
-
-        return stdHull
-
-    def plotStd(self, points):
-        self.plotData(points, self.generateStd(points), "standard")
-
-    def validate(self, points, results):
-        return sorted(results) == sorted(self.generateStd(points))
-
-    def saveResults(self, name, data):
-        time_diff = (data[TIME.format(END)] - data[TIME.format(START)]) * 1000
-        #print "   time: ", time_diff, "ms"
-        self.times.append(time_diff)
-        #self.writer.writerow([self.name + name, time_diff])
+        self.algorithm(data)
+        end = time.clock()
+        return (time.clock() - start) * 1000
     
-    def writeResults(self, dataName):
-        self.writer.writerow([self.name, dataName] + self.times[10:])
+    def plot(self, filename, data):
+        hull = self.algorithm(data)
+        self.plotter.save(filename, data, hull)
     
     def sideOfLine(self, i, j, k):
         a = j[1] - i[1]
@@ -108,7 +65,19 @@ class Runner(object):
         return ((a*k[0] + b*k[1]) - c)
 
 
-class BruteForce(Runner):
+class Standard(ConvexHull):
+    
+    def algorithm(self, points):
+        stdHull = []
+        for vertex in QHull(points).vertices:
+            stdHull.append((points[vertex][0], points[vertex][1]))
+        return stdHull
+    
+    def validate(self, data, results):
+        return sorted(results) == sorted(self.algorithm(data))
+
+
+class BruteForce(ConvexHull):
 
     #@profile
     def algorithm(self, dataPoints):
@@ -138,8 +107,7 @@ class BruteForce(Runner):
         return list(convexHull)
 
 
-class QuickHull(Runner):
-
+class QuickHull(ConvexHull):
 
     #@profile
     def algorithm(self, dataPoints):
@@ -161,7 +129,6 @@ class QuickHull(Runner):
         hull += self.subHull(minPoint, maxPoint, left, -1)
         hull += self.subHull(minPoint, maxPoint, right, 1)
         return list(set(hull))
-   
 
     #@profile
     def subHull(self, i, j, points, startSide):
@@ -206,59 +173,7 @@ class QuickHull(Runner):
         return maxPoint
 
 
-def generateMatrix(num):
-    return [ (x[0], x[1]) for x in rand(num, 2) ]
-
-
-def tester(algo, data, dataName, size=110):
-    for i in range(1, size):
-        algo.run("Brute", data)
-    algo.writeResults(dataName)
-    algo.times = []
-
-
-def main(output):
-    csvfile = open(output, 'w')
-    writer = csv.writer(csvfile)
-
-    brute = BruteForce(name=BRUTE, writer=writer, outdir="output")
-    quick = QuickHull(name=QUICK, writer=writer, outdir="output")
-
-    size = 50
-    
-    #data2 = sorted(Gen.randomHorLine(size))
-    #data3 = sorted(Gen.randomVertLine(size))
-    
-    randomData = sorted(Gen.random(size))
-    triangleData = sorted(Gen.randomTriangle(size))
-    polyData = sorted(Gen.randomConvexPolygon(size))
-    
-    
-    #data6 = sorted(Gen.trimetData("data/tm_stops.json", size))
-    #brute.run("test", data, plot=False)
-    #quick.run("test", data, plot=False)
-    
-    
-    tester(brute, randomData, "Random", size=110) 
-    tester(quick, randomData, "Random", size=110) 
-    tester(brute, triangleData, "Triangle", size=110) 
-    tester(quick, triangleData, "Triangle", size=110) 
-    tester(brute, polyData, "Convex Polygon", size=110) 
-    tester(quick, polyData, "Convex Polygon", size=110) 
-
-
-
-    #for data in [data1, data4, data5, data6]:
-    #    print
-    #    brute.run("brute", data, plot=False)
-    #    quick.run("quick", data, plot=True)
-    
-    #brute.plotStd(data)    
-    csvfile.close()
-
-
 if __name__ == '__main__':
-    main("results.csv")
-
+    pass
 
 
