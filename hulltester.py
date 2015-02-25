@@ -20,6 +20,8 @@ MEM = "{}_memory"
 class Runner(object):
 
     def __init__(self, **kwargs):
+        self.times = []
+        
         try:
             self.writer = kwargs["writer"]
             self.name = kwargs["name"]
@@ -36,14 +38,15 @@ class Runner(object):
     
     def run(self, name, points, plot=False):
         data = {}        
-        print "TEST", name
+        #print "TEST", name
         self.record(data, START)     
         results = self.algorithm(points)
         self.record(data, END)     
-        check = self.validate(points, results) 
-        print "   validate: ", check 
+        #check = self.validate(points, results) 
+        #print "   validate: ", check 
         if plot: self.plotData(points, results, name)
-        self.writeResults("test", data)
+        self.saveResults("test", data)
+        
         return results
 
     def plotData(self, data, hull, name):
@@ -89,10 +92,14 @@ class Runner(object):
     def validate(self, points, results):
         return sorted(results) == sorted(self.generateStd(points))
 
-    def writeResults(self, name, data):
+    def saveResults(self, name, data):
         time_diff = (data[TIME.format(END)] - data[TIME.format(START)]) * 1000
-        print "   time: ", time_diff, "ms"
-        self.writer.writerow([self.name + name, time_diff, "hello"])
+        #print "   time: ", time_diff, "ms"
+        self.times.append(time_diff)
+        #self.writer.writerow([self.name + name, time_diff])
+    
+    def writeResults(self, dataName):
+        self.writer.writerow([self.name, dataName] + self.times[10:])
     
     def sideOfLine(self, i, j, k):
         a = j[1] - i[1]
@@ -103,6 +110,7 @@ class Runner(object):
 
 class BruteForce(Runner):
 
+    #@profile
     def algorithm(self, dataPoints):
         # NOTE what if it is a line of 3 points? should the middle point be included?
         if len(dataPoints) <= 2:
@@ -132,6 +140,8 @@ class BruteForce(Runner):
 
 class QuickHull(Runner):
 
+
+    #@profile
     def algorithm(self, dataPoints):
         if len(dataPoints) <= 2:
             return list(set(dataPoints))
@@ -151,7 +161,9 @@ class QuickHull(Runner):
         hull += self.subHull(minPoint, maxPoint, left, -1)
         hull += self.subHull(minPoint, maxPoint, right, 1)
         return list(set(hull))
-    
+   
+
+    #@profile
     def subHull(self, i, j, points, startSide):
         if not points: return []
         if len(points) == 1: return [points[0]]
@@ -198,25 +210,48 @@ def generateMatrix(num):
     return [ (x[0], x[1]) for x in rand(num, 2) ]
 
 
+def tester(algo, data, dataName, size=110):
+    for i in range(1, size):
+        algo.run("Brute", data)
+    algo.writeResults(dataName)
+    algo.times = []
+
+
 def main(output):
-    csvfile = open(output, 'a')
+    csvfile = open(output, 'w')
     writer = csv.writer(csvfile)
 
     brute = BruteForce(name=BRUTE, writer=writer, outdir="output")
     quick = QuickHull(name=QUICK, writer=writer, outdir="output")
 
-    size = 100
-    data1 = sorted(Gen.random(size))
-    data2 = sorted(Gen.randomHorLine(size))
-    data3 = sorted(Gen.randomVertLine(size))
-    data4 = sorted(Gen.randomTriangle(size))
-    data5 = sorted(Gen.randomConvexPolygon(size))
-    data6 = sorted(Gen.trimetStops("data/tm_stops.json", size))
+    size = 50
     
-    for data in [data1, data4, data5, data6]:
-        print
-        brute.run("brute", data, plot=False)
-        quick.run("quick", data, plot=True)
+    #data2 = sorted(Gen.randomHorLine(size))
+    #data3 = sorted(Gen.randomVertLine(size))
+    
+    randomData = sorted(Gen.random(size))
+    triangleData = sorted(Gen.randomTriangle(size))
+    polyData = sorted(Gen.randomConvexPolygon(size))
+    
+    
+    #data6 = sorted(Gen.trimetData("data/tm_stops.json", size))
+    #brute.run("test", data, plot=False)
+    #quick.run("test", data, plot=False)
+    
+    
+    tester(brute, randomData, "Random", size=110) 
+    tester(quick, randomData, "Random", size=110) 
+    tester(brute, triangleData, "Triangle", size=110) 
+    tester(quick, triangleData, "Triangle", size=110) 
+    tester(brute, polyData, "Convex Polygon", size=110) 
+    tester(quick, polyData, "Convex Polygon", size=110) 
+
+
+
+    #for data in [data1, data4, data5, data6]:
+    #    print
+    #    brute.run("brute", data, plot=False)
+    #    quick.run("quick", data, plot=True)
     
     #brute.plotStd(data)    
     csvfile.close()

@@ -1,6 +1,7 @@
 *.*swp
 *.*pyc
 *.*~
+*.py.*prof
 env
 output
 scratch

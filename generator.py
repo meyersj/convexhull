@@ -63,7 +63,7 @@ class Generator(object):
         return data
 
     @staticmethod
-    def trimetStops(inJson, num=None):
+    def trimetData(inJson, num=None):    
         data = []
         with open(inJson) as f:
             points = json.loads(f.read())["features"]
