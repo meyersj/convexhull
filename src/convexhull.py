@@ -64,6 +64,9 @@ class ConvexHull(object):
         c = (i[0] * j[1]) - (i[1] * j[0])
         return ((a*k[0] + b*k[1]) - c)
 
+    #returns positive if k is to the left, negative if to the right, and 0 if colinear
+    def leftOfLine(self, i, j, k): 
+        return j[0]-i[0])*(k[1]-i[1]) - (j[1]-i[1])*(k[0]-i[0]
 
 class Standard(ConvexHull):
     
@@ -172,6 +175,24 @@ class QuickHull(ConvexHull):
                 maxPoint = k
         return maxPoint
 
+
+class GiftWrap(ConvexHull):
+
+    #@profile
+    def algorithm(self, dataPoints):
+        pointOnHull = dataPoints[0]
+        endPoint = dataPoints[1]
+        hull = []
+
+        while endPoint != dataPoints[0]:
+            hull.append(pointOnHull)
+            endPoint = dataPoints[0]
+            for point in dataPoints[1:]:
+                if endPoint == pointOnHull or self.leftOfLine(pointOnHull, endPoint, point) > 0:
+                    endPoint = point
+            pointOnHull = endPoint
+        return hull
+                   
 
 if __name__ == '__main__':
     pass
