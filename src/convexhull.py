@@ -17,7 +17,7 @@ class Plotter(object):
 
     def save(self, name, data, hull):
         clf()
-        hull = self.sortHull(hull, data)
+        hull = self.sortHull(data, hull)
         for i in data:
             plot(i[0], i[1], "b.")
         ylim(0,1)
@@ -66,7 +66,7 @@ class ConvexHull(object):
 
     #returns positive if k is to the left, negative if to the right, and 0 if colinear
     def leftOfLine(self, i, j, k): 
-        return j[0]-i[0])*(k[1]-i[1]) - (j[1]-i[1])*(k[0]-i[0]
+        return (j[0]-i[0])*(k[1]-i[1]) - (j[1]-i[1])*(k[0]-i[0])
 
 class Standard(ConvexHull):
     
@@ -196,5 +196,9 @@ class GiftWrap(ConvexHull):
 
 if __name__ == '__main__':
     pass
+
+    # generate dataset
+    # run on each algo
+    # look at profile and copy results to table
 
 
