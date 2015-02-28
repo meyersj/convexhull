@@ -9,10 +9,10 @@ from generator import Generator as Gen
 
 
 BRUTE = "BruteForce"
+GIFT = "GiftWrap"
 QUICK = "QuickHull"
 STD = "Standard"
-GIFT = "GiftWrap"
-ALGOS = [BRUTE, QUICK, GIFT, STD]
+ALGOS = [BRUTE, GIFT, QUICK, STD]
 
 RAND = "random"
 TRI = "triangle"
@@ -95,16 +95,18 @@ class Runner(object):
         google = gspread.login(config.EMAIL, config.PW)        
         sheet = google.open(SHEET).worksheet(name)
         
-        for i, algo in enumerate(ALGOS):
-            sheet.update_cell(1,i+1, algo)
-            for j in range(0, 10):
-                sheet.update_cell(j+2, i+1, results[algo][j])
-        #with open(os.path.join(self.outdir, name + ".csv"), 'w') as f:
-        #    writer = csv.writer(f)
-        #    writer.writerow(ALGOS)
-        #    for i in range(0, 10):
-        #        row = [ results[algo][i] for algo in ALGOS ]
-        #        writer.writerow(row)
+        new_cells = []
+        for algo in ALGOS:
+            new_cells.append(algo)
+        for i in range(0, 10):
+            for algo in ALGOS:
+                new_cells.append(results[algo][i])
+
+        cell_list = sheet.range('A1:D11')
+        for i, cell in enumerate(cell_list):
+            cell.value = new_cells[i]
+
+        sheet.update_cells(cell_list)
 
     def runSuite(self, sample, size):
         results = {BRUTE:[], QUICK:[], GIFT:[], STD:[]}
@@ -133,11 +135,10 @@ def main():
     runner = Runner(outdir=outdir)
     
     suites = []
-    suites += [ (sample, 20) for sample in SAMPLES ]
-    #suites += [ (sample, 100) for sample in SAMPLES ]
+    suites += [ (sample, 50) for sample in SAMPLES ]
+    suites += [ (sample, 100) for sample in SAMPLES ]
     #suites += [ (sample, 200) for sample in SAMPLES ]
     #suites += [ (sample, 400) for sample in SAMPLES ]
-    #suites += [ (sample, 800) for sample in SAMPLES ]
    
     # run time tests
     for sample, size in suites:
