@@ -1,6 +1,9 @@
 import os
 import csv
 
+import gspread
+
+import config
 from convexhull import Plotter, Standard, BruteForce, QuickHull, GiftWrap
 from generator import Generator as Gen
 
@@ -21,6 +24,10 @@ TRASH = 5        # this many of the first test times are ignored
 TESTS = 20       # num of times each dataset is tested
 SETS = 10        # num of different datasets generated and tested for each test type
 
+# google spreadsheet name
+SHEET = "Timings Output"
+
+
 class Runner(object):
 
     def __init__(self, outdir="output"):
@@ -31,7 +38,7 @@ class Runner(object):
         self.quick = QuickHull()
         self.gift = GiftWrap() 
         self.std = Standard() 
-
+        
     def validate(self):
         for i in range(0, TESTS):
             data = Gen.generate("random", GEN_SIZE)
@@ -85,12 +92,19 @@ class Runner(object):
         print
 
     def writeResults(self, name, results):
-        with open(os.path.join(self.outdir, name), 'w') as f:
-            writer = csv.writer(f)
-            writer.writerow(ALGOS)
-            for i in range(0, 10):
-                row = [ results[algo][i] for algo in ALGOS ]
-                writer.writerow(row)
+        google = gspread.login(config.EMAIL, config.PW)        
+        sheet = google.open(SHEET).worksheet(name)
+        
+        for i, algo in enumerate(ALGOS):
+            sheet.update_cell(1,i+1, algo)
+            for j in range(0, 10):
+                sheet.update_cell(j+2, i+1, results[algo][j])
+        #with open(os.path.join(self.outdir, name + ".csv"), 'w') as f:
+        #    writer = csv.writer(f)
+        #    writer.writerow(ALGOS)
+        #    for i in range(0, 10):
+        #        row = [ results[algo][i] for algo in ALGOS ]
+        #        writer.writerow(row)
 
     def runSuite(self, sample, size):
         results = {BRUTE:[], QUICK:[], GIFT:[], STD:[]}
@@ -108,7 +122,7 @@ class Runner(object):
             results[GIFT].append(gift)
             results[STD].append(std)
             self.printResults(brute, gift, quick, std)
-        self.writeResults(sample + str(size) + ".csv", results) 
+        self.writeResults(sample + str(size), results) 
 
 def getBaseDir():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -119,7 +133,7 @@ def main():
     runner = Runner(outdir=outdir)
     
     suites = []
-    suites += [ (sample, 50) for sample in SAMPLES ]
+    suites += [ (sample, 20) for sample in SAMPLES ]
     #suites += [ (sample, 100) for sample in SAMPLES ]
     #suites += [ (sample, 200) for sample in SAMPLES ]
     #suites += [ (sample, 400) for sample in SAMPLES ]
