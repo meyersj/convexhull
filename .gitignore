@@ -6,3 +6,4 @@ env
 output
 scratch
 results.csv
+config.py
