@@ -215,7 +215,12 @@ if __name__ == '__main__':
     start = time.clock()
     hull = std.algorithm(data)
     print "std", (time.clock() - start) * 1000
-    print std.validate(data, hull)
+    
+    #start = time.clock()
+    #data = Gen.generate("polygon", 300)
+    #hull = brute.algorithm(data)
+    #print time.clock() - start
+    #print std.validate(data, hull)
     
     # generate dataset
     # run on each algo
