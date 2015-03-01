@@ -15,13 +15,16 @@ class Plotter(object):
         #if not os.path.exists(self.outdir):
         #    os.makedirs(self.outdir)
 
-    def save(self, name, data, hull):
+
+    def save(self, name, data, hull, lim={'x':(0,1), 'y':(0,1)}):
         clf()
         hull = self.sortHull(data, hull)
         for i in data:
             plot(i[0], i[1], "b.")
-        ylim(0,1)
-        xlim(0,1) 
+        ylim(lim['y'][0], lim['y'][1])
+        xlim(lim['x'][0], lim['x'][1])
+        #ylim(0,1)
+        #xlim(0,1) 
         i = 0
         while i < len(hull)-1:
             plot([hull[i][0], hull[i+1][0]], [hull[i][1], hull[i+1][1]], color='k')
@@ -188,15 +191,32 @@ class GiftWrap(ConvexHull):
             hull.append(pointOnHull)
             endPoint = dataPoints[0]
             for point in dataPoints[1:]:
-                if endPoint == pointOnHull or self.leftOfLine(pointOnHull, endPoint, point) > 0:
+                if endPoint == pointOnHull or \
+                    self.leftOfLine(pointOnHull, endPoint, point) > 0:
                     endPoint = point
             pointOnHull = endPoint
         return hull
                    
 
 if __name__ == '__main__':
-    pass
-
+    brute = BruteForce()
+    std = Standard()
+    quick = QuickHull()
+    gift = GiftWrap()
+    
+    data = Gen.generate("random", 1000000)
+    #data = Gen.trimet("../data/trimet_stops.json")
+    
+    start = time.clock()
+    hull = quick.algorithm(data)
+    print "quick", (time.clock() - start) * 1000
+    hull = gift.algorithm(data)
+    print "gift", (time.clock() - start) * 1000
+    start = time.clock()
+    hull = std.algorithm(data)
+    print "std", (time.clock() - start) * 1000
+    print std.validate(data, hull)
+    
     # generate dataset
     # run on each algo
     # look at profile and copy results to table

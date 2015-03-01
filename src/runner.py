@@ -59,9 +59,16 @@ class Runner(object):
 
    
     def plot(self, sample):
-        data = Gen.generate(sample, 40)
+        lim={'x':(0,1), 'y':(0,1)}
+        if sample.startswith("trimet"):
+            data = Gen.trimet("../data/" + sample + ".json")
+            if sample == "trimet_stops":
+                lim={'x':(7516042,7745141), 'y':(577844,742815)}
+            else:
+                lim={'x':(7552870,7717026), 'y':(636210,723941)}
+        else: data = Gen.generate(sample, 40)
         hull = self.std.algorithm(data) 
-        self.plotter.save(sample, data, hull)
+        self.plotter.save(sample, data, hull, lim=lim)
 
     def timeRuns(self, algo, data):
         avg = []
@@ -141,12 +148,14 @@ def main():
     #suites += [ (sample, 400) for sample in SAMPLES ]
    
     # run time tests
-    for sample, size in suites:
-        runner.runSuite(sample, size) 
+    #for sample, size in suites:
+    #    runner.runSuite(sample, size) 
     
     # generate visualization of different datasets
-    #for sample in SAMPLES:
-    #    runner.plot(sample)
+    for sample in SAMPLES:
+        runner.plot(sample)
+    runner.plot("trimet_max_stops")
+    runner.plot("trimet_stops")
 
     #runner.validate()
 if __name__ == "__main__":

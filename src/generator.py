@@ -6,12 +6,14 @@ import numpy
 
 # [ (x1, y1), (x2, y2), .... ]
 
+
 class Generator(object):
     
     @staticmethod
     def generate(sample, size):
         data = []
         try:
+            
             data = getattr(Generator, sample)(size)
         except AttributeError:
             print "ERROR: invalid sample type"
@@ -57,7 +59,7 @@ class Generator(object):
                 data.append((
                     point["geometry"]["coordinates"][0],
                     point["geometry"]["coordinates"][1]))
-        return data
+        return sorted(data)
     
     """
     @staticmethod
