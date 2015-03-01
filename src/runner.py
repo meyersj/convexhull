@@ -135,10 +135,9 @@ def main():
     runner = Runner(outdir=outdir)
     
     suites = []
-    suites += [ (sample, 50) for sample in SAMPLES ]
     suites += [ (sample, 100) for sample in SAMPLES ]
-    #suites += [ (sample, 200) for sample in SAMPLES ]
-    #suites += [ (sample, 400) for sample in SAMPLES ]
+    suites += [ (sample, 200) for sample in SAMPLES ]
+    suites += [ (sample, 300) for sample in SAMPLES ]
    
     # run time tests
     for sample, size in suites:

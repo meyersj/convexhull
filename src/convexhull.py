@@ -195,8 +195,14 @@ class GiftWrap(ConvexHull):
                    
 
 if __name__ == '__main__':
-    pass
-
+    brute = BruteForce()
+    std = Standard()
+    start = time.clock()
+    data = Gen.generate("polygon", 300)
+    hull = brute.algorithm(data)
+    print time.clock() - start
+    print std.validate(data, hull)
+    
     # generate dataset
     # run on each algo
     # look at profile and copy results to table
