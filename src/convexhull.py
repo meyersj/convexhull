@@ -204,8 +204,8 @@ if __name__ == '__main__':
     quick = QuickHull()
     gift = GiftWrap()
     
-    data = Gen.generate("random", 1000000)
-    #data = Gen.trimet("../data/trimet_stops.json")
+    #data = Gen.generate("random", 1000000)
+    data = Gen.trimet("../data/trimet_max_stops.json")
     
     start = time.clock()
     hull = quick.algorithm(data)
