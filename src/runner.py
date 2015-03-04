@@ -18,6 +18,7 @@ RAND = "random"
 TRI = "triangle"
 POLY = "polygon"
 SAMPLES = [RAND, TRI, POLY]
+SAMPLES = [POLY]
 
 # SET consist of multiple TESTS on the same data of the same size
 TRASH = 5        # this many of the first test times are ignored
@@ -25,7 +26,7 @@ TESTS = 20       # num of times each dataset is tested
 SETS = 10        # num of different datasets generated and tested for each test type
 
 # google spreadsheet name
-SHEET = "Timings Output"
+SHEET = "Timings Output 2"
 
 
 class Runner(object):
@@ -98,7 +99,7 @@ class Runner(object):
         print "  ", STD, std, "ms"
         print
 
-    def writeResults(self, name, results):
+    def writeToSheets(self, name, results):
         google = gspread.login(config.EMAIL, config.PW)        
         sheet = google.open(SHEET).worksheet(name)
         
@@ -115,11 +116,14 @@ class Runner(object):
 
         sheet.update_cells(cell_list)
 
+
     def runSuite(self, sample, size):
         results = {BRUTE:[], QUICK:[], GIFT:[], STD:[]}
         for i in range(0, SETS):
             self.printHeader(i, sample)
             data = Gen.generate(sample, size)
+            #print len(data)
+            #data = Gen.trimet("../data/trimet_max_stops.json", size)
             # run tests
             brute = self.timeRuns(self.brute, data)
             quick = self.timeRuns(self.quick, data)
@@ -131,7 +135,9 @@ class Runner(object):
             results[GIFT].append(gift)
             results[STD].append(std)
             self.printResults(brute, gift, quick, std)
-        self.writeResults(sample + str(size), results) 
+        results[BRUTE] = [ 0 for x in range(0, 10)]
+        results[GIFT] = [ 0 for x in range(0, 10)]
+        self.writeToSheets(sample + str(size), results) 
 
 def getBaseDir():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -147,14 +153,15 @@ def main():
     suites += [ (sample, 300) for sample in SAMPLES ]
    
     # run time tests
-    #for sample, size in suites:
-    #    runner.runSuite(sample, size) 
+    for sample, size in suites:
+        runner.runSuite(sample, size) 
     
+    #runner.runSuite("trimet_max_stops", None)
     # generate visualization of different datasets
-    for sample in SAMPLES:
-        runner.plot(sample)
-    runner.plot("trimet_max_stops")
-    runner.plot("trimet_stops")
+    #for sample in SAMPLES:
+    #    runner.plot(sample)
+    #runner.plot("trimet_max_stops")
+    #runner.plot("trimet_stops")
 
     #runner.validate()
 if __name__ == "__main__":

@@ -41,9 +41,10 @@ class Generator(object):
         data = [] 
         distance = numpy.random.uniform(0,.5)
         mid = (.5, .5)
-        angleInc = (360/num)
-        angle = 0 
-        while angle < 360:
+        angleInc = (360/float(num))
+        angle = 0.0 
+        i = 1
+        while round(angle, 10) < round(360.0, 10):
             x = mid[0] + (distance * math.cos(math.radians(angle)))
             y = mid[1] + (distance * math.sin(math.radians(angle)))
             data.append((float(x), float(y)))
@@ -88,4 +89,6 @@ class Generator(object):
     """
 
 if __name__ == "__main__":
-    Generator.trimetStops("data/tm_stops.json")
+    #Generator.trimetStops("data/tm_stops.json")
+
+    print len(Generator.generate("polygon", 300))
