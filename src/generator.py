@@ -13,7 +13,6 @@ class Generator(object):
     def generate(sample, size):
         data = []
         try:
-            
             data = getattr(Generator, sample)(size)
         except AttributeError:
             print "ERROR: invalid sample type"
@@ -91,4 +90,11 @@ class Generator(object):
 if __name__ == "__main__":
     #Generator.trimetStops("data/tm_stops.json")
 
-    print len(Generator.generate("polygon", 300))
+    #print len(Generator.generate("polygon", 300))
+    print len(Generator.trimet("data/trimet_max_stops.json"))
+    # all stops: 6874
+    # max stops: 145
+
+
+
+

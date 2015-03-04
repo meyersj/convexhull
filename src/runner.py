@@ -17,6 +17,7 @@ ALGOS = [BRUTE, GIFT, QUICK, STD]
 RAND = "random"
 TRI = "triangle"
 POLY = "polygon"
+TRIMET = "trimet"
 SAMPLES = [RAND, TRI, POLY]
 #SAMPLES = [POLY]
 
@@ -117,15 +118,14 @@ class Runner(object):
         sheet.update_cells(cell_list)
 
 
-    def runSuite(self, sample, size):
+    def runSuite(self, sample, size, filename="", bruteF=True):
         results = {BRUTE:[], QUICK:[], GIFT:[], STD:[]}
         for i in range(0, SETS):
             self.printHeader(i, sample)
-            data = Gen.generate(sample, size)
-            #print len(data)
-            #data = Gen.trimet("../data/trimet_max_stops.json", size)
-            # run tests
-            brute = self.timeRuns(self.brute, data)
+            if sample == TRIMET: data = Gen.trimet(filename, size)
+            else: data = Gen.generate(sample, size)
+            brute = 0
+            if bruteF: brute = self.timeRuns(self.brute, data)
             quick = self.timeRuns(self.quick, data)
             gift = self.timeRuns(self.gift, data)
             std = self.timeRuns(self.std, data)
@@ -138,6 +138,7 @@ class Runner(object):
         #results[BRUTE] = [ 0 for x in range(0, 10)]
         #results[GIFT] = [ 0 for x in range(0, 10)]
         self.writeToSheets(sample + str(size), results) 
+        #self.writeToSheets(sample + str(size), results) 
 
 def getBaseDir():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -146,17 +147,31 @@ def getBaseDir():
 def main():
     outdir = os.path.join(getBaseDir(), "output") 
     runner = Runner(outdir=outdir)
-    
-    suites = []
-    suites += [ (sample, 100) for sample in SAMPLES ]
-    suites += [ (sample, 200) for sample in SAMPLES ]
-    suites += [ (sample, 400) for sample in SAMPLES ]
    
+    suites = [ (sample, 145, None) for sample in SAMPLES ]
+    suites.append((TRIMET, 145, "/home/jeff/convexhull/data/trimet_max_stops.json"))
+
     # run time tests
+    for sample, size, filename in suites:
+        runner.runSuite(sample, size, filename=filename) 
+
+    suites = [ (sample, 6874, None) for sample in SAMPLES ]
+    suites.append((TRIMET, 6874, "/home/jeff/convexhull/data/trimet_stops.json"))
+
+    # run time tests
+    for sample, size, filename in suites:
+        runner.runSuite(sample, size, filename=filename, bruteF=False) 
+
+    samples = [RAND, TRI]
+    suites = []
+    suites += [ (sample, 10000) for sample in samples ]
+    suites += [ (sample, 100000) for sample in samples ]
+    suites += [ (sample, 1000000) for sample in samples ]
+   
     for sample, size in suites:
-        runner.runSuite(sample, size) 
-    
-    #runner.runSuite("trimet_max_stops", None)
+        runner.runSuite(sample, size, bruteF=False) 
+   
+    #runner.runSuite("trimet_stops", None)
     # generate visualization of different datasets
     #for sample in SAMPLES:
     #    runner.plot(sample)
