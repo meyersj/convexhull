@@ -119,11 +119,11 @@ class Runner(object):
 
     def runSuite(self, sample, size):
         results = {BRUTE:[], QUICK:[], GIFT:[], STD:[]}
+        data = Gen.trimet("../data/trimet_max_stops.json", size)
         for i in range(0, SETS):
             self.printHeader(i, sample)
-            data = Gen.generate(sample, size)
+            #data = Gen.generate(sample, size)
             #print len(data)
-            #data = Gen.trimet("../data/trimet_max_stops.json", size)
             # run tests
             brute = self.timeRuns(self.brute, data)
             quick = self.timeRuns(self.quick, data)
@@ -135,9 +135,8 @@ class Runner(object):
             results[GIFT].append(gift)
             results[STD].append(std)
             self.printResults(brute, gift, quick, std)
-        results[BRUTE] = [ 0 for x in range(0, 10)]
-        results[GIFT] = [ 0 for x in range(0, 10)]
-        self.writeToSheets(sample + str(size), results) 
+        self.writeToSheets(sample, results) 
+        #self.writeToSheets(sample + str(size), results) 
 
 def getBaseDir():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -147,16 +146,16 @@ def main():
     outdir = os.path.join(getBaseDir(), "output") 
     runner = Runner(outdir=outdir)
     
-    suites = []
-    suites += [ (sample, 100) for sample in SAMPLES ]
-    suites += [ (sample, 200) for sample in SAMPLES ]
-    suites += [ (sample, 300) for sample in SAMPLES ]
+    #suites = []
+    #suites += [ (sample, 100) for sample in SAMPLES ]
+    #suites += [ (sample, 200) for sample in SAMPLES ]
+    #suites += [ (sample, 300) for sample in SAMPLES ]
    
     # run time tests
-    for sample, size in suites:
-        runner.runSuite(sample, size) 
+    #for sample, size in suites:
+    #    runner.runSuite(sample, size) 
     
-    #runner.runSuite("trimet_max_stops", None)
+    runner.runSuite("trimet_max_stops", None)
     # generate visualization of different datasets
     #for sample in SAMPLES:
     #    runner.plot(sample)
