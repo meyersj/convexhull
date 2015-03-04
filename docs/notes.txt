@@ -23,3 +23,20 @@ run 110 tests get rid of first 10
 
 
 
+run all tests again
+
+
+25 total tests
+10 suites
+
+All Tests + Max Stops (Size of Max Stops)
+
+All Tests + Stops (Size of Stops)
+
+Just Random and Triangle for Gift, Quick and STD
+1 million
+100 grand
+10 grand
+
+
+

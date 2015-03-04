@@ -18,7 +18,7 @@ RAND = "random"
 TRI = "triangle"
 POLY = "polygon"
 SAMPLES = [RAND, TRI, POLY]
-SAMPLES = [POLY]
+#SAMPLES = [POLY]
 
 # SET consist of multiple TESTS on the same data of the same size
 TRASH = 5        # this many of the first test times are ignored
@@ -121,23 +121,24 @@ class Runner(object):
         results = {BRUTE:[], QUICK:[], GIFT:[], STD:[]}
         for i in range(0, SETS):
             self.printHeader(i, sample)
-            data = Gen.generate(sample, size)
+            #data = Gen.generate(sample, size)
             #print len(data)
-            #data = Gen.trimet("../data/trimet_max_stops.json", size)
+            data = Gen.trimet("../data/trimet_stops.json", size)
             # run tests
-            brute = self.timeRuns(self.brute, data)
+            brute = 0
+            #brute = self.timeRuns(self.brute, data)
             quick = self.timeRuns(self.quick, data)
             gift = self.timeRuns(self.gift, data)
             std = self.timeRuns(self.std, data)
             # save avg
-            results[BRUTE].append(brute)
+            #results[BRUTE].append(brute)
             results[QUICK].append(quick)
             results[GIFT].append(gift)
             results[STD].append(std)
             self.printResults(brute, gift, quick, std)
-        results[BRUTE] = [ 0 for x in range(0, 10)]
-        results[GIFT] = [ 0 for x in range(0, 10)]
-        self.writeToSheets(sample + str(size), results) 
+        #results[BRUTE] = [ 0 for x in range(0, 10)]
+        #results[GIFT] = [ 0 for x in range(0, 10)]
+        #self.writeToSheets(sample + str(size), results) 
 
 def getBaseDir():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -153,10 +154,10 @@ def main():
     suites += [ (sample, 300) for sample in SAMPLES ]
    
     # run time tests
-    for sample, size in suites:
-        runner.runSuite(sample, size) 
+    #for sample, size in suites:
+    #    runner.runSuite(sample, size) 
     
-    #runner.runSuite("trimet_max_stops", None)
+    runner.runSuite("trimet_stops", None)
     # generate visualization of different datasets
     #for sample in SAMPLES:
     #    runner.plot(sample)
