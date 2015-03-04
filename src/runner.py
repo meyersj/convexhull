@@ -18,7 +18,7 @@ RAND = "random"
 TRI = "triangle"
 POLY = "polygon"
 SAMPLES = [RAND, TRI, POLY]
-SAMPLES = [POLY]
+#SAMPLES = [POLY]
 
 # SET consist of multiple TESTS on the same data of the same size
 TRASH = 5        # this many of the first test times are ignored
@@ -26,7 +26,7 @@ TESTS = 20       # num of times each dataset is tested
 SETS = 10        # num of different datasets generated and tested for each test type
 
 # google spreadsheet name
-SHEET = "Timings Output 2"
+SHEET = "Timings Output"
 
 
 class Runner(object):
@@ -135,8 +135,8 @@ class Runner(object):
             results[GIFT].append(gift)
             results[STD].append(std)
             self.printResults(brute, gift, quick, std)
-        results[BRUTE] = [ 0 for x in range(0, 10)]
-        results[GIFT] = [ 0 for x in range(0, 10)]
+        #results[BRUTE] = [ 0 for x in range(0, 10)]
+        #results[GIFT] = [ 0 for x in range(0, 10)]
         self.writeToSheets(sample + str(size), results) 
 
 def getBaseDir():
@@ -150,7 +150,7 @@ def main():
     suites = []
     suites += [ (sample, 100) for sample in SAMPLES ]
     suites += [ (sample, 200) for sample in SAMPLES ]
-    suites += [ (sample, 300) for sample in SAMPLES ]
+    suites += [ (sample, 400) for sample in SAMPLES ]
    
     # run time tests
     for sample, size in suites:
