@@ -1,0 +1,1278 @@
+Name: random
+Suite: 1 / 10
+Tests: 20
+
+Traceback (most recent call last):
+  File "convexhull/src/runner.py", line 183, in <module>
+    main()
+  File "convexhull/src/runner.py", line 156, in main
+    runner.runSuite(sample, size, filename=filename) 
+  File "convexhull/src/runner.py", line 128, in runSuite
+    if bruteF: brute = self.timeRuns(self.brute, data)
+  File "convexhull/src/runner.py", line 80, in timeRuns
+    time = algo.time(data)
+  File "/home/jeff/convexhull/src/convexhull.py", line 56, in time
+    self.algorithm(data)
+  File "/home/jeff/convexhull/src/convexhull.py", line 107, in algorithm
+    pass
+KeyboardInterrupt
+Name: random
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 965.5673 ms
+   GiftWrap 1.1356 ms
+   QuickHull 0.892 ms
+   Standard 0.23805 ms
+
+Name: random
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 941.7465 ms
+   GiftWrap 1.1329 ms
+   QuickHull 0.88245 ms
+   Standard 0.233850000001 ms
+
+Name: random
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 1030.5023 ms
+   GiftWrap 1.40785 ms
+   QuickHull 0.98835 ms
+   Standard 0.23985 ms
+
+Name: random
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 1014.769 ms
+   GiftWrap 1.46175 ms
+   QuickHull 0.87285 ms
+   Standard 0.24165 ms
+
+Name: random
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 978.94945 ms
+   GiftWrap 1.7318 ms
+   QuickHull 0.960299999998 ms
+   Standard 0.273099999999 ms
+
+Name: random
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 957.9499 ms
+   GiftWrap 1.55035 ms
+   QuickHull 0.947549999999 ms
+   Standard 0.304949999997 ms
+
+Name: random
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 995.79865 ms
+   GiftWrap 1.20095 ms
+   QuickHull 0.866949999998 ms
+   Standard 0.258900000001 ms
+
+Name: random
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 995.1068 ms
+   GiftWrap 1.3023 ms
+   QuickHull 0.992950000003 ms
+   Standard 0.24015 ms
+
+Name: random
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 1004.9625 ms
+   GiftWrap 1.8043 ms
+   QuickHull 0.959499999998 ms
+   Standard 0.255549999997 ms
+
+Name: random
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 988.4544 ms
+   GiftWrap 1.06965 ms
+   QuickHull 0.955400000002 ms
+   Standard 0.248949999998 ms
+
+Name: triangle
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 1071.41535 ms
+   GiftWrap 0.317799999996 ms
+   QuickHull 0.685500000003 ms
+   Standard 0.217599999999 ms
+
+Name: triangle
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 1126.23235 ms
+   GiftWrap 0.340399999999 ms
+   QuickHull 0.680400000005 ms
+   Standard 0.218700000005 ms
+
+Name: triangle
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 1075.54255 ms
+   GiftWrap 0.311600000003 ms
+   QuickHull 0.680100000002 ms
+   Standard 0.219100000001 ms
+
+Name: triangle
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 995.85865 ms
+   GiftWrap 0.317000000004 ms
+   QuickHull 0.688200000005 ms
+   Standard 0.222799999997 ms
+
+Name: triangle
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 1068.87845 ms
+   GiftWrap 0.31085 ms
+   QuickHull 0.67645 ms
+   Standard 0.214550000004 ms
+
+Name: triangle
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 1117.75155 ms
+   GiftWrap 0.313399999996 ms
+   QuickHull 0.672549999999 ms
+   Standard 0.216299999997 ms
+
+Name: triangle
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 1104.7057 ms
+   GiftWrap 0.571699999998 ms
+   QuickHull 1.20755 ms
+   Standard 0.354950000002 ms
+
+Name: triangle
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 1045.8816 ms
+   GiftWrap 0.329250000001 ms
+   QuickHull 0.692249999997 ms
+   Standard 0.228549999994 ms
+
+Name: triangle
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 1113.94095 ms
+   GiftWrap 0.312450000001 ms
+   QuickHull 0.671150000002 ms
+   Standard 0.215449999996 ms
+
+Name: triangle
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 1087.16715 ms
+   GiftWrap 0.311599999998 ms
+   QuickHull 0.672599999996 ms
+   Standard 0.218499999988 ms
+
+Name: polygon
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 1527.1018 ms
+   GiftWrap 15.09115 ms
+   QuickHull 2.73304999999 ms
+   Standard 0.466800000004 ms
+
+Name: polygon
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 1527.9219 ms
+   GiftWrap 15.1489 ms
+   QuickHull 2.87259999999 ms
+   Standard 0.469250000003 ms
+
+Name: polygon
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 1547.5841 ms
+   GiftWrap 15.59775 ms
+   QuickHull 2.7878 ms
+   Standard 0.467600000002 ms
+
+Name: polygon
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 1534.79155 ms
+   GiftWrap 15.1043 ms
+   QuickHull 2.7496 ms
+   Standard 0.467799999996 ms
+
+Name: polygon
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 1528.75675 ms
+   GiftWrap 15.3097 ms
+   QuickHull 2.76485 ms
+   Standard 0.466349999994 ms
+
+Name: polygon
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 1504.2486 ms
+   GiftWrap 15.0502 ms
+   QuickHull 2.77285 ms
+   Standard 0.467800000007 ms
+
+Name: polygon
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 1578.5778 ms
+   GiftWrap 15.07915 ms
+   QuickHull 2.7321 ms
+   Standard 0.462500000009 ms
+
+Name: polygon
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 1564.91085 ms
+   GiftWrap 15.3029 ms
+   QuickHull 2.8103 ms
+   Standard 0.465849999983 ms
+
+Name: polygon
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 1543.0215 ms
+   GiftWrap 15.60655 ms
+   QuickHull 2.82089999999 ms
+   Standard 0.479800000005 ms
+
+Name: polygon
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 1738.7857 ms
+   GiftWrap 16.6244 ms
+   QuickHull 2.7391 ms
+   Standard 0.545199999999 ms
+
+Name: trimet
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 1062.2692 ms
+   GiftWrap 0.633999999997 ms
+   QuickHull 0.7203 ms
+   Standard 0.223900000009 ms
+
+Name: trimet
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 1068.61265 ms
+   GiftWrap 0.637449999999 ms
+   QuickHull 0.721700000003 ms
+   Standard 0.226549999996 ms
+
+Name: trimet
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 1057.494 ms
+   GiftWrap 0.636800000001 ms
+   QuickHull 0.716349999999 ms
+   Standard 0.226150000003 ms
+
+Name: trimet
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 1059.29385 ms
+   GiftWrap 0.626950000003 ms
+   QuickHull 0.762050000009 ms
+   Standard 0.228550000003 ms
+
+Name: trimet
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 1068.4699 ms
+   GiftWrap 0.627899999984 ms
+   QuickHull 0.713900000005 ms
+   Standard 0.22459999999 ms
+
+Name: trimet
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 1063.8235 ms
+   GiftWrap 0.63884999995 ms
+   QuickHull 0.723499999981 ms
+   Standard 0.226200000009 ms
+
+Name: trimet
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 1060.41645 ms
+   GiftWrap 0.632399999995 ms
+   QuickHull 0.720249999972 ms
+   Standard 0.228049999998 ms
+
+Name: trimet
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 1071.48365 ms
+   GiftWrap 0.630049999995 ms
+   QuickHull 0.716 ms
+   Standard 0.225450000016 ms
+
+Name: trimet
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 1071.5056 ms
+   GiftWrap 0.638649999996 ms
+   QuickHull 0.717349999991 ms
+   Standard 0.226550000014 ms
+
+Name: trimet
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 1087.03995 ms
+   GiftWrap 0.632250000001 ms
+   QuickHull 0.735499999996 ms
+   Standard 0.22909999999 ms
+
+Name: random
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 140.8042 ms
+   QuickHull 47.4594 ms
+   Standard 3.61635000002 ms
+
+Name: random
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 149.3133 ms
+   QuickHull 42.966 ms
+   Standard 3.49534999999 ms
+
+Name: random
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 125.70735 ms
+   QuickHull 39.8056 ms
+   Standard 3.74595000001 ms
+
+Name: random
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 106.73825 ms
+   QuickHull 37.1717 ms
+   Standard 3.52075000004 ms
+
+Name: random
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 132.0671 ms
+   QuickHull 45.94295 ms
+   Standard 4.02344999999 ms
+
+Name: random
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 112.67295 ms
+   QuickHull 41.44785 ms
+   Standard 3.70175000002 ms
+
+Name: random
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 162.0754 ms
+   QuickHull 42.8985000001 ms
+   Standard 3.95259999999 ms
+
+Name: random
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 128.74545 ms
+   QuickHull 48.68665 ms
+   Standard 3.57454999998 ms
+
+Name: random
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 136.0979 ms
+   QuickHull 41.9877 ms
+   Standard 3.7627 ms
+
+Name: random
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 123.22775 ms
+   QuickHull 41.56405 ms
+   Standard 3.5122 ms
+
+Name: triangle
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 15.5528 ms
+   QuickHull 33.61675 ms
+   Standard 3.53515000002 ms
+
+Name: triangle
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 15.80425 ms
+   QuickHull 34.00365 ms
+   Standard 3.58149999997 ms
+
+Name: triangle
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 15.84685 ms
+   QuickHull 34.466 ms
+   Standard 3.51045 ms
+
+Name: triangle
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 17.1264 ms
+   QuickHull 35.9019 ms
+   Standard 3.92005000001 ms
+
+Name: triangle
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 16.8576 ms
+   QuickHull 37.38335 ms
+   Standard 4.17379999998 ms
+
+Name: triangle
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 16.1897 ms
+   QuickHull 33.33085 ms
+   Standard 3.5737 ms
+
+Name: triangle
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 16.16055 ms
+   QuickHull 36.3539 ms
+   Standard 3.67169999998 ms
+
+Name: triangle
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 17.05095 ms
+   QuickHull 34.28055 ms
+   Standard 3.56519999999 ms
+
+Name: triangle
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 15.72745 ms
+   QuickHull 33.74735 ms
+   Standard 3.57955000003 ms
+
+Name: triangle
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 15.9659 ms
+   QuickHull 34.3343 ms
+   Standard 3.58205000001 ms
+
+Name: polygon
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 36944.7789 ms
+   QuickHull 278.34985 ms
+   Standard 18.7769 ms
+
+Name: polygon
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 35601.88955 ms
+   QuickHull 278.55655 ms
+   Standard 19.6334000001 ms
+
+Name: polygon
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 36582.9349 ms
+   QuickHull 291.74 ms
+   Standard 20.6162 ms
+
+Name: polygon
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 36116.3872 ms
+   QuickHull 273.3431 ms
+   Standard 18.3778500001 ms
+
+Name: polygon
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 37029.67305 ms
+   QuickHull 276.77375 ms
+   Standard 19.4944000001 ms
+
+Name: polygon
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 36724.27795 ms
+   QuickHull 272.5416 ms
+   Standard 19.99835 ms
+
+Name: polygon
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 36405.7372 ms
+   QuickHull 277.57125 ms
+   Standard 19.13135 ms
+
+Name: polygon
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 36367.0274 ms
+   QuickHull 277.2372 ms
+   Standard 22.5195999999 ms
+
+Name: polygon
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 37144.13135 ms
+   QuickHull 282.2494 ms
+   Standard 19.8856000002 ms
+
+Name: polygon
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 37290.84315 ms
+   QuickHull 272.07285 ms
+   Standard 19.3679 ms
+
+Name: trimet
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 50.7929999999 ms
+   QuickHull 51.9362000003 ms
+   Standard 3.42965000018 ms
+
+Name: trimet
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 52.3162999999 ms
+   QuickHull 40.20335 ms
+   Standard 3.35390000018 ms
+
+Name: trimet
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 52.8659000001 ms
+   QuickHull 40.4132000001 ms
+   Standard 3.54619999989 ms
+
+Name: trimet
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 51.6951999998 ms
+   QuickHull 40.4197499999 ms
+   Standard 3.36240000015 ms
+
+Name: trimet
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 52.3657000003 ms
+   QuickHull 40.9606000003 ms
+   Standard 3.53060000007 ms
+
+Name: trimet
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 52.6789000002 ms
+   QuickHull 39.4462499998 ms
+   Standard 3.48120000017 ms
+
+Name: trimet
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 53.94845 ms
+   QuickHull 39.6592500002 ms
+   Standard 3.56844999969 ms
+
+Name: trimet
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 53.5602999998 ms
+   QuickHull 42.2508000001 ms
+   Standard 3.66700000013 ms
+
+Name: trimet
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 52.8978499999 ms
+   QuickHull 40.4976999999 ms
+   Standard 3.59460000018 ms
+
+Name: trimet
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 55.29875 ms
+   QuickHull 42.0676999999 ms
+   Standard 3.70285000008 ms
+
+Name: random
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 152.3133 ms
+   QuickHull 69.8637499999 ms
+   Standard 5.30594999991 ms
+
+Name: random
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 207.9955 ms
+   QuickHull 66.6045999997 ms
+   Standard 5.0827500002 ms
+
+Name: random
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 193.077 ms
+   QuickHull 68.8534500002 ms
+   Standard 5.50569999987 ms
+
+Name: random
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 187.76745 ms
+   QuickHull 80.2501499998 ms
+   Standard 5.54384999969 ms
+
+Name: random
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 300.792 ms
+   QuickHull 61.91125 ms
+   Standard 5.62909999999 ms
+
+Name: random
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 232.2257 ms
+   QuickHull 71.1595000002 ms
+   Standard 5.33270000033 ms
+
+Name: random
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 250.48895 ms
+   QuickHull 64.2574500001 ms
+   Standard 5.79464999992 ms
+
+Name: random
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 176.0291 ms
+   QuickHull 72.7516500001 ms
+   Standard 6.46405000016 ms
+
+Name: random
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 189.7342 ms
+   QuickHull 67.9845500001 ms
+   Standard 5.32804999993 ms
+
+Name: random
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 215.35585 ms
+   QuickHull 66.4906500001 ms
+   Standard 5.39209999961 ms
+
+Name: triangle
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 23.8151 ms
+   QuickHull 52.2219499997 ms
+   Standard 5.32800000037 ms
+
+Name: triangle
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 23.8630000001 ms
+   QuickHull 51.1669000002 ms
+   Standard 5.16340000031 ms
+
+Name: triangle
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 22.7435499998 ms
+   QuickHull 51.0957499999 ms
+   Standard 5.26789999958 ms
+
+Name: triangle
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 24.2457999999 ms
+   QuickHull 50.8681999999 ms
+   Standard 5.16689999995 ms
+
+Name: triangle
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 24.6143000002 ms
+   QuickHull 52.8625999999 ms
+   Standard 5.73494999999 ms
+
+Name: triangle
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 25.8192500003 ms
+   QuickHull 49.289 ms
+   Standard 5.24640000012 ms
+
+Name: triangle
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 23.7210999998 ms
+   QuickHull 48.86775 ms
+   Standard 5.33690000002 ms
+
+Name: triangle
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 25.5455 ms
+   QuickHull 48.2600000006 ms
+   Standard 5.19310000018 ms
+
+Name: triangle
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 22.9020499998 ms
+   QuickHull 49.2031000001 ms
+   Standard 5.18774999982 ms
+
+Name: triangle
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 23.3309500003 ms
+   QuickHull 49.9913000001 ms
+   Standard 5.2131999998 ms
+
+Name: random
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3364.4468 ms
+   QuickHull 661.51455 ms
+   Standard 94.4456499999 ms
+
+Name: random
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 2868.1917 ms
+   QuickHull 741.11285 ms
+   Standard 91.9731000002 ms
+
+Name: random
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 2785.28575 ms
+   QuickHull 698.4878 ms
+   Standard 93.3534500001 ms
+
+Name: random
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4085.65395 ms
+   QuickHull 703.0314 ms
+   Standard 88.0553500003 ms
+
+Name: random
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3771.4152 ms
+   QuickHull 767.4187 ms
+   Standard 96.4982500003 ms
+
+Name: random
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3709.4745 ms
+   QuickHull 797.2887 ms
+   Standard 89.0913 ms
+
+Name: random
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 2954.14085 ms
+   QuickHull 812.10215 ms
+   Standard 96.9058999999 ms
+
+Name: random
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3840.6868 ms
+   QuickHull 678.63095 ms
+   Standard 91.9125500001 ms
+
+Name: random
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4039.29205 ms
+   QuickHull 758.1033 ms
+   Standard 96.18015 ms
+
+Name: random
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4013.52515 ms
+   QuickHull 783.22735 ms
+   Standard 94.6250499999 ms
+
+Name: triangle
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 351.00045 ms
+   QuickHull 587.7368 ms
+   Standard 90.1237000001 ms
+
+Name: triangle
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 349.03905 ms
+   QuickHull 604.6689 ms
+   Standard 99.6164499998 ms
+
+Name: triangle
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 341.0219 ms
+   QuickHull 610.90745 ms
+   Standard 97.4420999999 ms
+
+Name: triangle
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 360.7455 ms
+   QuickHull 600.43535 ms
+   Standard 90.5666999998 ms
+
+Name: triangle
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 340.32425 ms
+   QuickHull 586.15305 ms
+   Standard 91.3326500001 ms
+
+Name: triangle
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 351.9026 ms
+   QuickHull 590.12975 ms
+   Standard 90.0791499997 ms
+
+Name: triangle
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 350.55685 ms
+   QuickHull 596.61035 ms
+   Standard 94.4317 ms
+
+Name: triangle
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 357.42695 ms
+   QuickHull 591.29685 ms
+   Standard 95.7190499999 ms
+
+Name: triangle
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 340.542 ms
+   QuickHull 600.95375 ms
+   Standard 94.46955 ms
+
+Name: triangle
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 373.205 ms
+   QuickHull 593.3755 ms
+   Standard 96.8104499998 ms
+
+Name: random
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 46144.8415 ms
+   QuickHull 7707.99385 ms
+   Standard 1178.88605 ms
+
+Name: random
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 41587.99645 ms
+   QuickHull 7753.01295 ms
+   Standard 1355.0992 ms
+
+Name: random
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 43277.30995 ms
+   QuickHull 6598.7957 ms
+   Standard 1235.26555 ms
+
+Name: random
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 54777.8166 ms
+   QuickHull 8279.48285 ms
+   Standard 1332.66035 ms
+
+Name: random
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 47988.6567 ms
+   QuickHull 8471.45255 ms
+   Standard 1356.7238 ms
+
+Name: random
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 43459.15415 ms
+   QuickHull 8720.9598 ms
+   Standard 1357.70125 ms
+
+Name: random
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 52722.7733 ms
+   QuickHull 7536.85595 ms
+   Standard 1385.46155 ms
+
+Name: random
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 55509.06375 ms
+   QuickHull 7494.4502 ms
+   Standard 1420.4674 ms
+
+Name: random
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 45706.76415 ms
+   QuickHull 7487.5618 ms
+   Standard 1348.9309 ms
+
+Name: random
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 41550.5853 ms
+   QuickHull 8587.09555 ms
+   Standard 1340.9547 ms
+
+Name: triangle
+Suite: 1 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3986.4362 ms
+   QuickHull 6381.9314 ms
+   Standard 1361.08355 ms
+
+Name: triangle
+Suite: 2 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3649.11735 ms
+   QuickHull 6044.3815 ms
+   Standard 1170.92265 ms
+
+Name: triangle
+Suite: 3 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4144.7941 ms
+   QuickHull 6404.8551 ms
+   Standard 1425.37905 ms
+
+Name: triangle
+Suite: 4 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3987.8241 ms
+   QuickHull 6276.288 ms
+   Standard 1310.21285 ms
+
+Name: triangle
+Suite: 5 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4170.17145 ms
+   QuickHull 6503.5209 ms
+   Standard 1431.1236 ms
+
+Name: triangle
+Suite: 6 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 3970.2316 ms
+   QuickHull 6280.4419 ms
+   Standard 1339.94585 ms
+
+Name: triangle
+Suite: 7 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4252.01015 ms
+   QuickHull 6482.2187 ms
+   Standard 1454.45315 ms
+
+Name: triangle
+Suite: 8 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4126.41715 ms
+   QuickHull 6363.4954 ms
+   Standard 1371.92435 ms
+
+Name: triangle
+Suite: 9 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4160.61915 ms
+   QuickHull 6393.43555 ms
+   Standard 1445.349 ms
+
+Name: triangle
+Suite: 10 / 10
+Tests: 20
+
+   BruteForce 0 ms
+   GiftWrap 4080.45265 ms
+   QuickHull 6357.4906 ms
+   Standard 1414.3066 ms
+

@@ -42,6 +42,5 @@ Just Random and Triangle for Gift, Quick and STD
 
 Testing suite running times
 100, 200, 400: 5:00 PM to 11:30 PM
-
-145, 6874, 10k, 100k, 1000k 10:45 A
+145, 6874, 10k, 100k, 1000k 10:45 AM to 7:00 PM
 
